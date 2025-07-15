@@ -1,5 +1,4 @@
-const File = require('../models/file');
-const { options } = require('../routes/FileUpload');
+const File = require('../models/file')
 const cloudinary = require('cloudinary').v2
 
 // local file upload -> handler function
@@ -63,12 +62,11 @@ exports.imageUpload = async(req, res) => {
 
         // validation
         const supportedTypes = ['jpg', 'png', 'jpeg'];
-       
+        
 
         const fileType = file.name.split('.')[1].toLowerCase();
 
         if(!isFileTypeSupported(fileType, supportedTypes)){
-            options.resource_type = "auto";
             return res.status(400).json({
                 success: false,
                 message: "File format not supported..."
@@ -77,7 +75,7 @@ exports.imageUpload = async(req, res) => {
 
         // file format is supported then upload in cloudinary
 
-        const response = await uploadFileToCloudinary(file, "CodeHelp");
+        const response = await uploadFileToCloudinary(file, "FileUpolad");
         console.log("Response: ", response)
 
         // DB me entry save karni hai 
@@ -130,7 +128,7 @@ exports.videoUpload = async(req, res) => {
 
         // file format is supported then upload in cloudinary
 
-        const response = await uploadFileToCloudinary(file, "CodeHelp");
+        const response = await uploadFileToCloudinary(file, "FileUpload");
         console.log("Response: ", response)
 
         // DB me entry save karni hai 
